@@ -23,4 +23,4 @@ It should work on 5.4.8 as well, but we strongly advise you NOT to run such old 
 ## License
 
 
-Please see the `license agreement <https://github.com/justalinko/maframe/blob/master/LICENSE.rst>`
+Please see the [license agreement](https://github.com/justalinko/maframe/blob/master/LICENSE.rst)
