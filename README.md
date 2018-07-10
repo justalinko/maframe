@@ -24,3 +24,11 @@ It should work on 5.4.8 as well, but we strongly advise you NOT to run such old 
 
 
 Please see the [license agreement](https://github.com/justalinko/maframe/blob/master/LICENSE.rst)
+
+## Contributing
+
+If you wanna contribute this project you can contact : <alinkokomansuby@gmail.com>
+
+## Bug issues
+
+Submit new issues if you found some bug or probleme [here](https://github.com/justalinko/maframe/issues)
