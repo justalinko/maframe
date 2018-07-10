@@ -69,11 +69,3 @@
 	a.btn:hover{
 		background: #555;
 	}
-	#download,#contact_us{
-		background: #888;
-		color: #eee;
-	}
-	#home,#donate{
-		background: #eee;
-		color: #888;
-	}

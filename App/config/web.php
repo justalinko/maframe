@@ -1,5 +1,15 @@
 <?php 
 
+/*
+* --------------------
+* Web configuration
+* --------------------
+*
+*/
+
+$config['web']['default_platform'] = ''; 			
+$config['web']['default_controller'] = 'Welcome'; 
+$config['web']['default_action'] = 'index';  
 
 $config['web']['url'] = 'http://workspace.kinal/maframe2/';
 

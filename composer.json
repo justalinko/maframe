@@ -1,7 +1,7 @@
 {
 	"name": "shutdown57/maframe",
 	"type": "framework",
-	"description": "Simple MVC Framework",
+	"description": "The Maframe simple MVC Framework for php.",
 	"keywords": ["framework", "mvc", "php", "oop", "programming"],
 	"homepage": "https://github.com/justalinko/maframe",
 	"license": "MIT",
@@ -12,5 +12,8 @@
 	"authors": [
 		{"name": "shutdown57", "email": "alinkokomansuby@gmail.com"}
 	],
+	"require": {
+		"php": ">=5.3.7"
+	}
 	
 }

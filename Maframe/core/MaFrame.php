@@ -46,16 +46,20 @@ Class MaFrame{
 
     define("UPLOAD_PATH", PUBLIC_PATH . "uploads" . DS);
 
+        // Load configuration file
+
+    require CONFIG_PATH . "config.php";
+    $GLOBALS['config'] = $config;
 
     // Define platform, controller, action, for example:
 
     // index.php?p=admin&c=Goods&a=add
 
-    define("PLATFORM", isset($_REQUEST['p']) ? $_REQUEST['p'] : '');
+    define("PLATFORM", isset($_REQUEST['p']) ? $_REQUEST['p'] : $GLOBALS['config']['web']['default_platform']);
 
-    define("CONTROLLER", isset($_REQUEST['c']) ? $_REQUEST['c'] : 'Welcome');
+    define("CONTROLLER", isset($_REQUEST['c']) ? $_REQUEST['c'] : $GLOBALS['config']['web']['default_controller']);
 
-    define("ACTION", isset($_REQUEST['a']) ? $_REQUEST['a'] : 'index');
+    define("ACTION", isset($_REQUEST['a']) ? $_REQUEST['a'] : $GLOBALS['config']['web']['default_action']);
 
 
     define("CURR_CONTROLLER_PATH", CONTROLLER_PATH . PLATFORM . DS);
@@ -63,10 +67,7 @@ Class MaFrame{
     define("CURR_VIEW_PATH", VIEW_PATH . PLATFORM . DS);
 
 
-    // Load configuration file
-
-    require CONFIG_PATH . "config.php";
-    $GLOBALS['config'] = $config;
+ 
     // Load core classes
 
     require CORE_PATH . "Controller.class.php";

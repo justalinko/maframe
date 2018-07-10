@@ -1,7 +1,9 @@
 <?php
-
-// DATABASE 
-
+/*
+* -------------------------
+* DATABASE CONFIGURATION
+* -------------------------
+*/
 
 $config['db']['hostname'] = 'localhost';
 

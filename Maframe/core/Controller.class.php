@@ -32,12 +32,7 @@ class Controller{
             die("Can't redirect ~");
         }
     }
-    public function show_error($error)
-    {
-        echo "<title>Error - maframe.</title>";
-        echo "<center><h3>".$error."</h3></center>";
-        exit;
-    }
+
 
 
 }

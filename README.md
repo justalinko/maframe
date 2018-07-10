@@ -17,7 +17,7 @@ It should work on 5.4.8 as well, but we strongly advise you NOT to run such old 
 
 ### Via composer
 
-```coming soon```
+```composer require shutdown57/maframe:dev-master```
 
 
 ## License
