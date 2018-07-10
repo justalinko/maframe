@@ -1,0 +1,16 @@
+{
+	"name": "shutdown57/maframe",
+	"type": "framework",
+	"description": "Simple MVC Framework",
+	"keywords": ["framework", "mvc", "php", "oop", "programming"],
+	"homepage": "https://github.com/justalinko/maframe",
+	"license": "MIT",
+	"support": {
+		"issues": "https://github.com/justalinko/maframe/issues",
+		"source": "https://github.com/justalinko/maframe"
+	},
+	"authors": [
+		{"name": "shutdown57", "email": "alinkokomansuby@gmail.com"}
+	],
+	
+}
