@@ -11,13 +11,11 @@
 	},
 	"authors": [
 		{"name": "shutdown57", "email": "alinkokomansuby@gmail.com"}
-<<<<<<< HEAD
+
 	],
 	"require": {
 		"php": ">=5.3.7"
 	}
-=======
-	]
->>>>>>> 4b3ef2a74c677bff83561315d9a3c7890b1f41bb
+
 	
 }

@@ -1,4 +1,5 @@
 <?php
+defined('ROOT') or die("Error.");
 
 Class WelcomeController extends Controller{
 
