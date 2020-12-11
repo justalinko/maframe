@@ -15,17 +15,38 @@ class Loader{
 
     public function helper($helper){
 
-        include HELPER_PATH . "{$helper}_helper.php";
+        if(file_exists(HELPER_PATH."{$helper}_helper.php")){
+        require_once HELPER_PATH . "{$helper}_helper.php";
+        }else{
+            echo "Helper error";
+            exit;
+        }
 
     }
 
     public function model($model)
     {
-    	include MODEL_PATH  . "{$model}.maframe.php";
-        return new $model;
-    }
+        if(file_exists(MODEL_PATH."{$model}.maframe.php")){
 
-    public function publicdir($tipe = 'css',$file)
+    	require_once MODEL_PATH  . "{$model}.maframe.php";
+        return new $model;
+
+        }else{
+            echo "Model error";
+            exit;
+        }
+    }
+    public function view($view)
+    {
+        if(file_exists(CURR_VIEW_PATH."{$view}.php"))
+        {
+            require_once CURR_VIEW_PATH."{$view}.php";
+        }else{
+            echo "error";
+            exit;
+        }
+    }
+    public function asset($tipe = 'css',$file)
     {
         $url = $GLOBALS['config']['web']['url'];
         $tipef = $GLOBALS['config']['web'][''.$tipe.''];

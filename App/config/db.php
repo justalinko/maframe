@@ -11,7 +11,7 @@ $config['db']['username'] = 'root';
 
 $config['db']['password'] = 'koko';
 
-$config['db']['database'] = 'inv';
+$config['db']['database'] = '';
 
 $config['db']['port'] = '';
 

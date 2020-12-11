@@ -1,0 +1,316 @@
+#!/usr/bin/php
+<?php
+/**
+ * @author shutdown57
+ * @author KarangranduCoder
+ * 
+ * @copyright 2018-2020
+ * 
+ * Holla is command line interface for HiFramework {HijaIyh Private Framework}
+ * Continue project from "hifw"  
+ */
+
+Class Holla{
+
+    private $app;
+    private $controller;
+    private $model;
+    private $view;
+
+    private $ask;
+    public function __construct()
+    {
+
+        $this->app = __DIR__. '/App/';
+        $this->controller = $this->app.'/controllers/';
+        $this->model = $this->app.'/models/';
+        $this->view = $this->app .'/views/';
+
+        print "
+        
+             _   _       _ _       
+            | | | | ___ | | | __ _ 
+            | |_| |/ _ \| | |/ _` |
+            |  _  | (_) | | | (_| |
+            |_| |_|\___/|_|_|\__,_|
+
+       +===============================+
+       | Holla Command Line Interfaces |
+       +===============================+
+       @ MaFrame - 2020
+\n";
+    }
+    
+    /** CLI COMMAND SECTION */
+
+    public function cli_help()
+    {
+        print "## Available commands : \n\n";
+
+        print "======================================================\n";
+        $command = get_class_methods($this);
+        foreach($command as $cli)
+        {
+            if(preg_match("/cli_/",$cli))
+            {
+                $cli = str_replace("cli_","",$cli);
+                print "  => $cli \n";
+            }
+        }
+        print "======================================================\n";
+    }
+    public function zipper($name)
+    {
+        return @system('zip -r '.$name.' *');
+    }
+    public function recursive_copy($src,$dst) {
+        $dir = opendir($src);
+        @mkdir($dst);
+        while(( $file = readdir($dir)) ) {
+            if (( $file != '.' ) && ( $file != '..' )) {
+                if ( is_dir($src . '/' . $file) ) {
+                    $this->recursive_copy($src .'/'. $file, $dst .'/'. $file);
+                }
+                else {
+                    copy($src .'/'. $file,$dst .'/'. $file);
+                }
+            }
+        }
+        closedir($dir);
+    }
+    public function rm_rf($str) { 
+      
+        // Check for files 
+        if (is_file($str)) { 
+              
+            // If it is file then remove by 
+            // using unlink function 
+            return unlink($str); 
+        } 
+          
+        // If it is a directory. 
+        elseif (is_dir($str)) { 
+              
+            // Get the list of the files in this 
+            // directory 
+            $scan = glob(rtrim($str, '/').'/*'); 
+              
+            // Loop through the list of files 
+            foreach($scan as $index=>$path) { 
+                  
+                // Call recursive function 
+                $this->rm_rf($path); 
+            } 
+              
+            // Remove the directory itself 
+            return @rmdir($str); 
+        } 
+    } 
+    public function cli_git()
+    {
+        echo "##################### HOLLA GIT CONSOLE ##################### \n";
+        echo "'quit' for exiting the holla git console \n\n";
+        $fp = fopen("php://stdin", "r");
+        $in = '';
+        while($in != "quit") {
+            echo "holla:git > ";
+            $in=trim(fgets($fp));
+            @system('git '.$in);
+            echo "\n";
+            }
+    }
+    public function cli_console()
+    {
+        echo "##################### HOLLA  CONSOLE ##################### \n";
+        echo "'quit' for exiting the holla  console \n\n";
+        $fp = fopen("php://stdin", "r");
+        $in = '';
+        while($in != "quit") {
+            echo "holla > ";
+            $in=trim(fgets($fp));
+            @system($in);
+            echo "\n";
+            }
+    }
+    
+    public function cli_serve($param)
+    {
+
+
+        $param = ($param == '') ? "127.0.0.1:5758" : $param;
+        print "## Holla !!\n";
+        print "## Developing local server ... \n";
+        print " Starting http://{$param}  \n";
+        shell_exec("php -S {$param} -t Public/");
+    }
+    public function cli_make($param)
+    {
+        $make = ['model' => 'Generate model automatically',
+                 'controller' => 'Generate controller automatically',
+                'view' => 'Generate view automatically',
+                ];
+        if(empty($param))
+        {
+            print "   ## Available make commands : \n\n\n";
+            foreach($make as $ml=>$ds)
+            {
+                print "## {$ml}      ::   {$ds} \n";
+            }
+        }else{
+            echo "\n\n";
+            if($param == 'controller')
+            {
+                $this->createController();
+            }elseif($param == 'model')
+            {
+                $this->createModel();
+            }elseif($param == 'view')
+            {
+                $this->createView();
+            }
+        }
+    }
+
+    /** END OF CLI COMMAND */
+
+
+
+	public function header($filename=null)
+	{
+		if($filename != null)
+		{
+			$filename = 'Filename : '.$filename;
+		}else{
+			$filename ='';
+		}
+$template = '<?php defined(\'ROOT\') or die(\'Direct access not allowed \');
+/**
+* '.$filename.' | Hash ID : '.sha1($filename).'
+* --------------------------------------------------------------------------------------------------------
+* @author shutdown57 < indonesianpeople.shutdown57@gmail.com >
+* --------------------------------------------------------------------------------------------------------
+* This file was generated by Holla CLI - '.date('D, d-m-Y H:i:s').' ( '.date_default_timezone_get().' )
+* --------------------------------------------------------------------------------------------------------
+* 
+* Made with ♥ by : 林浩
+*
+**/
+
+';
+		return $template;
+    }
+   
+    public function alert($type = 1)
+	{
+		if($type == 1)
+		{
+			echo "\n\n============================[ SUCCESSFULLY ]============================\n\n";
+		}else{
+			echo "\n\n============================[ FAILED BROOT ]============================\n\n";
+		}
+	}
+    public function saveData($content,$file,$mode = 'w')
+	{
+		$fp = fopen($file,$mode);
+		return fwrite($fp,$content);
+		fclose($fp);
+    }
+    public function ask($ask)
+    {
+        print "## {$ask} ? ";
+        return $this->ask = trim(fgets(STDIN));
+    }
+
+    public function createActions($actions = array())
+    {
+        $temp = "";
+        foreach($actions as $action){
+        $temp .= "public function ".$action."Action(){\n
+            \$this->loader->view('".$action."');\n
+        }\n\n";
+        }
+        return $temp;
+
+    }
+    public function createController()
+	{
+        $filename = $this->ask('Controller Name');
+        $action = $this->ask('Actions ( separate by comma )');
+        $view = $this->ask('Generate view [y/N] ');
+        if(preg_match("/,/", $action))
+        {
+            $action = explode(",",$action);
+        }else{
+            $action = ['index'];
+        }
+        $filename = ucfirst($filename);
+
+		$path = $this->controller.$filename.'.maframe.php';
+		$content = $this->header($filename.'.php');
+        $content.= "Class ".ucfirst($filename)."Controller extends Controller{\n";
+        $content.= $this->createActions($action);
+        $content.="}\n\n";
+		if($this->saveData($content.'?>',$path))
+		{
+			$this->alert(1);
+		}else{
+			$this->alert(0);
+		}
+        if($view == 'Y' || $view =='y'){
+        echo "## Generate views \n";
+        foreach($action as $view)
+        {
+            echo "# Generate $view ... \n";
+            $this->createView($view);
+        }
+        }
+
+	}
+    public function createView($filename ='')
+    {
+        if($filename == ''){
+        $filename = $this->ask('View name');
+
+        }
+        $path = $this->view.$filename.'.php';
+        $content = "";
+        if($this->saveData($content,$path))
+        {
+            $this->alert(1);
+        }else{
+            $this->alert(0);
+        }
+    }
+
+    public function getCommand($param)
+	{
+		global $argv;
+		return @$argv[$param];
+    }
+    public function run()
+    {
+        global $argv;
+
+        if(empty($argv[1]))
+        {
+             $this->cli_help();
+        }else{
+        
+            $param1 = $this->getCommand(1);
+            $param2 = $this->getCommand(2);
+            $param3 = $this->getCommand(3);
+            
+            $methodName = 'cli_'.$param1;
+
+            if(method_exists($this, $methodName))
+            {
+                $this->$methodName($param2);
+            }
+        
+        }   
+    }
+}
+
+
+$holla = new Holla;
+$holla->run();

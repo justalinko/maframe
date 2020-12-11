@@ -35,6 +35,6 @@
  * @filesource
  */
 
-require './Maframe/core/MaFrame.php';
+require_once(dirname(__DIR__) . DIRECTORY_SEPARATOR. 'Maframe/core/MaFrame.php');
 
 MaFrame::run();

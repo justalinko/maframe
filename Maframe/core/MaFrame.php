@@ -18,7 +18,7 @@ Class MaFrame{
 
     define("DS", DIRECTORY_SEPARATOR);
 
-    define("ROOT", getcwd() . DS);
+    define("ROOT", dirname(dirname(__DIR__)) . DS);
 
     define("APP_PATH", ROOT . 'App' . DS);
 
